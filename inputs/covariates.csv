@@ -1,0 +1,41 @@
+variable,variable_description,category
+adult_assoc_pct_acs,Percentage of adult (18-64) population with associate's degree,Education
+adult_bach_pct_acs,Percentage of adult (18-64) population with bachelor's degree,Education
+adult_grad_pct_acs,Percentage of adult (18-64) population with graduate degree,Education
+adult_hs_pct_acs,Percentage of adult (18-64) population with HS degree,Education
+afdc_pk,"AFDC/TANF recipients per 1,000 population",Social support
+alc_disorder,Percentage of adults (18+) reporting alcohol disorder in the past year,Public health measures
+avgrent_acs,Average monthly gross rent,Housing measures
+bdrm_avgpsn_acs,Average persons per bedroom,Housing measures
+child_frgn_pct_acs,Percentage of children foreign born,Demographic measures
+child_medfaminc_acs,Median real family income of children,Economic well-being
+child_met_pct_acs,Percentage of children living in metropolitan area,Demographic measures
+child_move_pct_acs,Percentage of children changing residence in prior year,Housing measures
+child_nodad_pct_acs,Percentage of children with absent father,Demographic measures
+child_pct_acs_r_white,Percentage of children white (only) non-Hispanic,Demographic measures
+child_pct_acs_r_black,Percentage of children black (only) non-Hispanic,Demographic measures
+child_pct_acs_r_hispanic,Percentage of children Native American (only) non-Hispanic,Demographic measures
+child_pct_acs_r_aian,Percentage of children Hispanic,Demographic measures
+comwkr_medsal_acs,Median salary of community and social service specialist,Child welfare measures
+incshr_top1,Share of income going to top 1% of earners,Economic well-being
+incshr_top10,Share of income going to top 10% of earners,Economic well-being
+medval_acs,Median value of occupied housing units,Housing measures
+minwage_fed,Real federal minimum wage (2018USD),Economic well-being
+mort_age1to4,"Crude mortality rate for children age 1 to 4 (deaths divided by 100,000 births)",Public health measures
+mort_child_acc,"Crude child mortality rate for accidents (deaths divided by 100,000 births)",Public health measures
+mort_child_nontrans_acc,"Crude child mortality rate for non-transport accidents (deaths divided by 100,000 births)",Public health measures
+mort_postneo,"Post-neonatal infant mortality crude rate (deaths divided by 1,000 births)",Public health measures
+nslp_red_acs,"NSLP reduced participants per 1,000 school-aged children",Social support
+nslp_tot_acs,"NSLP total participants per 1,000 school-aged children",Social support
+overdose_rate_female,Crude death rate (deaths per 100K) by drug overdose for adult (18+) females,Public health measures
+prison_admit_f,female prison admits per 100K female,Criminal justice
+prison_pop_m,male prison population per 100K males,Criminal justice
+sbp_red_acs,"SBP reduced participants per 1,000 school-aged children",Social support
+schchild_insch_pct_acs,Percentage of school-aged children in school,Education
+socwkr_medsal_acs,Median salary of social worker,Child welfare measures
+suicide_rate_female,Crude death rate (deaths per 100K) by suicide for adult (18+) females,Public health measures
+suicide_rate_male,Crude death rate (deaths per 100K) by suicide for adult (18+) males,Public health measures
+turnover_casewkr_lw,Annual caseworker turnover (lower-bound),Child welfare measures
+turnover_casewkr_up,Annual caseworker turnover (upper-bound),Child welfare measures
+unemp_acs,Unemployment rate,Economic well-being
+wlfr_pk_acs,"Welfare recipiants per 1,000 population",Social support
