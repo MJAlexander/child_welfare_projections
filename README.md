@@ -39,8 +39,8 @@ Notes on data updates:
 In the `code` folder, the main scripts that need to be executed are prefixed with numbers. 
 
 - `1_load_prepare_data` processes the data to create a file for modeling (called `all_data_for_model`). If there have been updates to the data, this script needs to be run. 
-- `2_run_models` runs projection models for all outcome and race/ethnicity combinations and saves the results to the `results` folder and also within the `app` folder. 
-
+- `2_run_models` runs projection models for all outcome and race/ethnicity combinations and saves the results to the `results` folder. 
+- `3_prepare_results_for_app` reads in the results and prepares them for the Shiny app, saving the output too the `app` folder. 
 
 If there have been updates to the data, the covariates included in the model, these scripts should be run in numerical order. 
 
@@ -48,9 +48,11 @@ The remainder of the scripts in the `scripts` folder are either helper functions
 
 ## A note on the model
 
-The statistical model is written in the Stan programming langauge, and the file is contained in the `code/models` folder. Changes to the model will require editing this file and probably also the two functions (contained in the `code/functions` folder), `prepare_stan_data` and `write_save_model_results`.
+The statistical model is written in the Stan programming langauge, and the file is contained in the `code/models` folder. Changes to the model will require editing this file and probably also the two functions (contained in the `code/functions` folder), `prepare_stan_data` and `write_save_model_results`. This would take a more advanced knowledge of R and Stan compared to making data updates. 
 
+# Shiny App
 
+All code and inputs required to make the Shiny App are contained in the `app` folder. To run the app, open the `make_app` script and click the "Run App" button that is display at the top of the screen in RStudio. This runs the app locally. To publish the app (e.g. on the shinyapps.io website), click the "Publish" button on top of the app. If there have been data or model updated you will need to rerun and republish the Shiny app. 
 
 
 
