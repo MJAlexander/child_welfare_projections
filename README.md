@@ -46,6 +46,20 @@ If there have been updates to the data, the covariates included in the model, th
 
 The remainder of the scripts in the `scripts` folder are either helper functions or the model code. 
 
+## Changing the years of the model run
+
+Currently, the model is set to run using data from 2005 to 2018, with a projection period of 5 years. If these years need to be changed, then lines 26 and 27 of the `2_run_models` should be edited. For example, if 2019 is made available and is updated in the data files, the line 26 should change to 
+
+```
+years <- 2005:2019
+```
+
+If you would like to project forward 7 years instead of 5 years, for example, then line 27 becomes
+
+```
+P <- 7
+```
+
 ## A note on the model
 
 The statistical model is written in the Stan programming langauge, and the file is contained in the `code/models` folder. Changes to the model will require editing this file and probably also the two functions (contained in the `code/functions` folder), `prepare_stan_data` and `write_save_model_results`. This would take a more advanced knowledge of R and Stan compared to making data updates. 
