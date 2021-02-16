@@ -3,7 +3,7 @@
 
 # 1. Load packages and data -----------------------------------------------
 
-# Note: if packages do no exist, you can install them using install.packages("tidyverse") etc
+# Note: if packages do not exist, you can install them using install.packages("tidyverse") etc
 
 library(shiny)
 library(tidyverse)
@@ -16,17 +16,14 @@ library(plotly)
 library(tidybayes)
 library(ggpubr)
 
-
-# data
+# Data
 
 d_res <- read_csv("results/d_res.csv")
 betas <- read_csv("results/betas.csv")
 pr_res <- read_csv("results/pr_res.csv")
 state_div <- read_csv("inputs/state_division.csv")
 
-
-# 2. create national map --------------------------------------------------
-
+# 2. Create national map --------------------------------------------------
 
 state_map <- map_data("state")
 
@@ -42,17 +39,14 @@ Noax <- list(
   showgrid = FALSE
 )
 
-
-
 # 3. Shiny code -----------------------------------------------------------
+
 source("modules/national.R")
 source("modules/state.R")
 source("modules/covariates.R")
 source("modules/about.R")
 
-# 3b. Main app
-
-## user interface
+## User Interface -----
 
 ui <- dashboardPage(
   dashboardHeader(title = "Trends and projections of foster care indicators in the United States", titleWidth = 600),
@@ -82,7 +76,8 @@ ui <- dashboardPage(
   )
 )
 
-#### Server ####
+## Server -----
+
 server <- function(input, output) {
 
   # National Map
