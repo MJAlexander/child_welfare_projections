@@ -45,9 +45,12 @@ Noax <- list(
 
 
 # 3. Shiny code -----------------------------------------------------------
+source("modules/national.R")
+source("modules/state.R")
+source("modules/covariates.R")
+source("modules/about.R")
 
-fs::dir_ls("modules") %>%
-  walk(source)
+# 3b. Main app
 
 ## user interface
 
@@ -68,23 +71,13 @@ ui <- dashboardPage(
       national_ui("national", d_res = d_res),
 
       # State tab content
-      # state_ui("state", d_res = d_res),
+      state_ui("state", d_res = d_res),
 
       # Covariates tab content
-      # covariates_ui("state", betas = betas),
+      covariates_ui("covariates", betas = betas),
 
-
-
-      # Final tab content
-      tabItem(tabName = "About",
-              h2("About this project"),
-              fluidRow(
-                box(
-                  width = 9, solidHeader = FALSE, status = "primary",
-                  HTML("This app shows the preliminary results of a projection model of foster care outcomes by state in the United States.",
-                       '<br/>', '<br/>', "The projections are based on a Bayesian hirerchical state space model. In brief, foster care entries are modeled as a function of a set of demographic, socioeconomic, health and welfare variables (shown in the 'Covariates' tab). The association between each of the variables is allowed to vary across geography (census division) and time.",
-                       '<br/>', '<br/>', "Code can be found at: https://github.com/MJAlexander/child_welfare_projections.")
-                )))
+      # About tab content
+      about_ui()
     )
   )
 )
@@ -93,13 +86,13 @@ ui <- dashboardPage(
 server <- function(input, output) {
 
   # National Map
-  callModule(national_server, "national", d_res = d_res, merged_data = merged_data, Noax = Noax)
+  national_server("national", d_res = d_res, merged_data = merged_data, Noax = Noax)
 
   # State Server
-  # callModule(state_server, "state", d_res = d_res, betas = betas)
+  state_server("state", d_res = d_res, betas = betas, state_div = state_div, pr_res = pr_res)
 
   # Covariates Server
-  # callModule(covariates_server, "covariates", betas = betas)
+  covariates_server("covariates", betas = betas)
 
 }
 

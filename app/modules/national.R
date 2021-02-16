@@ -43,65 +43,67 @@ national_ui <- function(id, d_res) {
   )
 }
 
-national_server <- function(input, output, session, d_res, Noax) {
-  ns <- session$ns
+national_server <- function(id, d_res, merged_data, Noax) {
+  moduleServer(
+    id,
+    function(input, output, session) {
 
-  browser()
+      # National Map
 
-  # National Map
+      output$MapPlot <- renderPlotly({
+        if (input$type == "per capita") {
+          p <- ggplot(
+            data = merged_data %>% filter(
+              year == input$year,
+              indicator == input$indicator,
+              race == input$race,
+              ci_width == 0.75
+            ),
+            aes(text = sprintf("%s<br> %s (%s, %s)", state, round(fit * 1000, 2), round(fit_lower * 1000, 2), round(fit_upper * 1000, 2)))
+          ) +
+            geom_polygon(aes(x = long, y = lat, group = group, fill = fit * 1000), color = "black") +
+            scale_fill_viridis_c(
+              name = paste0(input$indicator, " per 1,000"),
+              limits = c(
+                min(d_res$fit[d_res$indicator == input$indicator & d_res$race == input$race] * 1000) * 0.95,
+                max(d_res$fit[d_res$indicator == input$indicator & d_res$race == input$race] * 1000) * 1
+              )
+            ) +
+            theme_void() +
+            coord_fixed(1.5) +
+            ggtitle(paste0("Foster care ", str_to_lower(input$indicator), ", ", input$year, " (per 1000)\n", input$race, " population"))
+          fig <- ggplotly(p, tooltip = "text") %>%
+            layout(xaxis = Noax, yaxis = Noax)
 
-  output$MapPlot <- renderPlotly({
-    if (input$type == "per capita") {
-      p <- ggplot(
-        data = merged_data %>% filter(
-          year == input$year,
-          indicator == input$indicator,
-          race == input$race,
-          ci_width == 0.75
-        ),
-        aes(text = sprintf("%s<br> %s (%s, %s)", state, round(fit * 1000, 2), round(fit_lower * 1000, 2), round(fit_upper * 1000, 2)))
-      ) +
-        geom_polygon(aes(x = long, y = lat, group = group, fill = fit * 1000), color = "black") +
-        scale_fill_viridis_c(
-          name = paste0(input$indicator, " per 1,000"),
-          limits = c(
-            min(d_res$fit[d_res$indicator == input$indicator & d_res$race == input$race] * 1000) * 0.95,
-            max(d_res$fit[d_res$indicator == input$indicator & d_res$race == input$race] * 1000) * 1
-          )
-        ) +
-        theme_void() +
-        coord_fixed(1.5) +
-        ggtitle(paste0("Foster care ", str_to_lower(input$indicator), ", ", input$year, " (per 1000)\n", input$race, " population"))
-      fig <- ggplotly(p, tooltip = "text") %>%
-        layout(xaxis = Noax, yaxis = Noax)
+          fig
+        }
+        else {
+          p <- ggplot(
+            data = merged_data %>% filter(
+              year == input$year,
+              indicator == input$indicator,
+              race == input$race,
+              ci_width == 0.75
+            ),
+            aes(text = sprintf("%s<br> %s (%s, %s)", state, round(fit_pop), round(fit_lower_pop), round(fit_upper_pop)))
+          ) +
+            geom_polygon(aes(x = long, y = lat, group = group, fill = fit_pop), color = "black") +
+            scale_fill_viridis_c(
+              name = "number",
+              limits = c(
+                min(d_res$fit_pop[d_res$indicator == input$indicator]) * 0.95,
+                max(d_res$fit_pop[d_res$indicator == input$indicator]) * 1
+              )
+            ) +
+            theme_void() +
+            coord_fixed(1.5) +
+            ggtitle(paste0("Foster care ", str_to_lower(input$indicator), ", ", input$year, " (number)\n", input$race, " population"))
+          fig <- ggplotly(p, tooltip = "text") %>%
+            layout(xaxis = Noax, yaxis = Noax)
 
-      fig
+          fig
+        }
+      })
     }
-    else {
-      p <- ggplot(
-        data = merged_data %>% filter(
-          year == input$year,
-          indicator == input$indicator,
-          race == input$race,
-          ci_width == 0.75
-        ),
-        aes(text = sprintf("%s<br> %s (%s, %s)", state, round(fit_pop), round(fit_lower_pop), round(fit_upper_pop)))
-      ) +
-        geom_polygon(aes(x = long, y = lat, group = group, fill = fit_pop), color = "black") +
-        scale_fill_viridis_c(
-          name = "number",
-          limits = c(
-            min(d_res$fit_pop[d_res$indicator == input$indicator]) * 0.95,
-            max(d_res$fit_pop[d_res$indicator == input$indicator]) * 1
-          )
-        ) +
-        theme_void() +
-        coord_fixed(1.5) +
-        ggtitle(paste0("Foster care ", str_to_lower(input$indicator), ", ", input$year, " (number)\n", input$race, " population"))
-      fig <- ggplotly(p, tooltip = "text") %>%
-        layout(xaxis = Noax, yaxis = Noax)
-
-      fig
-    }
-  })
+  )
 }
