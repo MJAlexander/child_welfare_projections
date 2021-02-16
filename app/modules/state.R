@@ -8,10 +8,8 @@ state_ui <- function(id, d_res) {
       class = "app-page",
       h2("State projections"),
       fluidRow(
-        box(
-          width = 10, solidHeader = FALSE, status = "primary",
-          "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
-        )
+        class = "app-row",
+        "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
       ),
       sidebarLayout(
         sidebarPanel(
