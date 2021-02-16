@@ -1,71 +1,75 @@
 covariates_ui <- function(id, betas) {
   ns <- shiny::NS(id)
 
-  tabItem(
-    tabName = "Covariates",
-    h2("Estimated association with covariates"),
-    fluidRow(
-      box(
-        width = 10, solidHeader = FALSE, status = "primary",
-        HTML(
-          "This tab shows the coefficient estimates for each of the covariates included in the model. Select and indicator, and one or more covariates to see estimates by census division and year. Coefficients sizes represent a %-% change after controlling for all other covariates in the model.",
-          "<br/>", "<br/>", "Note: only 9 covariates can be selected at any one time."
-        )
-      )
-    ),
-    sidebarLayout(
-      sidebarPanel(
-        selectInput(
-          inputId = ns("indicator"), label = "Indicator",
-          c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_1"),
-          label = "Child welfare measures",
-          choices = sort(unique(betas$variable_description[betas$category == "Child welfare measures"])), selected = "Median salary of social worker"
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_2"),
-          label = "Criminal justice",
-          choices = sort(unique(betas$variable_description[betas$category == "Criminal justice"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_3"),
-          label = "Demographic measures",
-          choices = sort(unique(betas$variable_description[betas$category == "Demographic measures"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_4"),
-          label = "Economic well-being",
-          choices = sort(unique(betas$variable_description[betas$category == "Economic well-being"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_5"),
-          label = "Education",
-          choices = sort(unique(betas$variable_description[betas$category == "Education"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_6"),
-          label = "Housing measures",
-          choices = sort(unique(betas$variable_description[betas$category == "Housing measures"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_7"),
-          label = "Public health measures",
-          choices = sort(unique(betas$variable_description[betas$category == "Public health measures"]))
-        ),
-        checkboxGroupInput(
-          inputId = ns("covariate_8"),
-          label = "Social support",
-          choices = sort(unique(betas$variable_description[betas$category == "Social support"]))
+
+  tabPanel(
+    "Covariates",
+    div(
+      class = "app-page",
+      h2("Estimated association with covariates"),
+      fluidRow(
+        box(
+          width = 10, solidHeader = FALSE, status = "primary",
+          HTML(
+            "This tab shows the coefficient estimates for each of the covariates included in the model. Select and indicator, and one or more covariates to see estimates by census division and year. Coefficients sizes represent a %-% change after controlling for all other covariates in the model.",
+            "<br/>", "<br/>", "Note: only 9 covariates can be selected at any one time."
+          )
         )
       ),
+      sidebarLayout(
+        sidebarPanel(
+          selectInput(
+            inputId = ns("indicator"), label = "Indicator",
+            c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_1"),
+            label = "Child welfare measures",
+            choices = sort(unique(betas$variable_description[betas$category == "Child welfare measures"])), selected = "Median salary of social worker"
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_2"),
+            label = "Criminal justice",
+            choices = sort(unique(betas$variable_description[betas$category == "Criminal justice"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_3"),
+            label = "Demographic measures",
+            choices = sort(unique(betas$variable_description[betas$category == "Demographic measures"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_4"),
+            label = "Economic well-being",
+            choices = sort(unique(betas$variable_description[betas$category == "Economic well-being"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_5"),
+            label = "Education",
+            choices = sort(unique(betas$variable_description[betas$category == "Education"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_6"),
+            label = "Housing measures",
+            choices = sort(unique(betas$variable_description[betas$category == "Housing measures"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_7"),
+            label = "Public health measures",
+            choices = sort(unique(betas$variable_description[betas$category == "Public health measures"]))
+          ),
+          checkboxGroupInput(
+            inputId = ns("covariate_8"),
+            label = "Social support",
+            choices = sort(unique(betas$variable_description[betas$category == "Social support"]))
+          )
+        ),
 
-      # Show a plot of the generated distribution
-      mainPanel(
-        plotOutput(ns("BetaPlot")),
-        br(),
-        plotOutput(ns("BetaPlotLegend"), inline = TRUE)
+        # Show a plot of the generated distribution
+        mainPanel(
+          plotOutput(ns("BetaPlot")),
+          br(),
+          plotOutput(ns("BetaPlotLegend"), inline = TRUE)
+        )
       )
     )
   )

@@ -1,45 +1,49 @@
 state_ui <- function(id, d_res) {
   ns <- shiny::NS(id)
 
-  tabItem(
-    tabName = "Time",
-    h2("State projections"),
-    fluidRow(
-      box(
-        width = 10, solidHeader = FALSE, status = "primary",
-        "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
-      )
-    ),
-    sidebarLayout(
-      sidebarPanel(
-        selectInput(
-          inputId = ns("state"),
-          label = "State",
-          choices = unique(d_res$state)
-        ),
-        selectInput(
-          inputId = ns("indicator"), label = "Indicator",
-          c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-        ),
-        selectInput(
-          inputId = ns("race"), label = "Race/ethnicity",
-          c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
-        ),
-        radioButtons(
-          inputId = ns("type"),
-          label = "Measure",
-          choices = c("per capita", "number")
+
+  tabPanel(
+    "Time",
+    div(
+      class = "app-page",
+      h2("State projections"),
+      fluidRow(
+        box(
+          width = 10, solidHeader = FALSE, status = "primary",
+          "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
         )
       ),
+      sidebarLayout(
+        sidebarPanel(
+          selectInput(
+            inputId = ns("state"),
+            label = "State",
+            choices = unique(d_res$state)
+          ),
+          selectInput(
+            inputId = ns("indicator"), label = "Indicator",
+            c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
+          ),
+          selectInput(
+            inputId = ns("race"), label = "Race/ethnicity",
+            c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
+          ),
+          radioButtons(
+            inputId = ns("type"),
+            label = "Measure",
+            choices = c("per capita", "number")
+          )
+        ),
 
-      # State based results
-      mainPanel(
-        plotlyOutput(ns("TimePlot")),
-        br(),
-        h4("Estimated probability of increase from year to year"),
-        tableOutput(ns("ProbTable")),
-        h4("Top covariates influencing projection"),
-        tableOutput(ns("CoefTable"))
+        # State based results
+        mainPanel(
+          plotlyOutput(ns("TimePlot")),
+          br(),
+          h4("Estimated probability of increase from year to year"),
+          tableOutput(ns("ProbTable")),
+          h4("Top covariates influencing projection"),
+          tableOutput(ns("CoefTable"))
+        )
       )
     )
   )

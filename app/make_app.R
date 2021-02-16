@@ -6,8 +6,8 @@
 # Note: if packages do not exist, you can install them using install.packages("tidyverse") etc
 
 library(shiny)
-library(tidyverse)
 library(shinydashboard)
+library(tidyverse)
 library(shinyWidgets)
 library(RColorBrewer)
 library(maps)
@@ -28,8 +28,8 @@ state_div <- read_csv("inputs/state_division.csv")
 state_map <- map_data("state")
 
 merged_data <- inner_join(state_map, d_res %>%
-                            mutate(region = state) %>%
-                            mutate(region = str_to_lower(region)), by = "region")
+  mutate(region = state) %>%
+  mutate(region = str_to_lower(region)), by = "region")
 
 Noax <- list(
   title = "",
@@ -48,31 +48,26 @@ source("modules/about.R")
 
 ## User Interface -----
 
-ui <- dashboardPage(
-  dashboardHeader(title = "Trends and projections of foster care indicators in the United States", titleWidth = 600),
-  dashboardSidebar(
-    sidebarMenu(
-      menuItem("National", tabName = "Map", icon = icon("globe")),
-      menuItem("State", tabName = "Time", icon = icon("th")),
-      menuItem("Covariates", tabName = "Covariates", icon = icon("users")),
-      menuItem("About", tabName = "About", icon = icon("info"))
-    )
+ui <- tagList(
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "screen.css")
   ),
-  dashboardBody(
-    setBackgroundColor(color = "white", shinydashboard = TRUE),
-    tabItems(
-      # National tab content
-      national_ui("national", d_res = d_res),
+  navbarPage(
+    title = "Trends and projections of foster care indicators in the United States",
+    theme = bslib::bs_theme(version = 4, bg = "white", fg = "black", primary = "#ED6F0F"),
 
-      # State tab content
-      state_ui("state", d_res = d_res),
 
-      # Covariates tab content
-      covariates_ui("covariates", betas = betas),
+    # National tab content
+    national_ui("national", d_res = d_res),
 
-      # About tab content
-      about_ui()
-    )
+    # State tab content
+    state_ui("state", d_res = d_res),
+
+    # Covariates tab content
+    covariates_ui("covariates", betas = betas),
+
+    # About tab content
+    about_ui()
   )
 )
 
@@ -88,7 +83,6 @@ server <- function(input, output) {
 
   # Covariates Server
   covariates_server("covariates", betas = betas)
-
 }
 
 # Run the application
