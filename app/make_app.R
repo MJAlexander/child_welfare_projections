@@ -6,7 +6,7 @@
 # Note: if packages do not exist, you can install them using install.packages("tidyverse") etc
 
 library(shiny)
-library(shinydashboard)
+library(shinycssloaders)
 library(tidyverse)
 library(shinyWidgets)
 library(RColorBrewer)
@@ -45,6 +45,8 @@ source("modules/national.R")
 source("modules/state.R")
 source("modules/covariates.R")
 source("modules/about.R")
+
+options(spinner.color = "#ED6F0F")
 
 ## User Interface -----
 

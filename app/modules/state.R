@@ -37,7 +37,7 @@ state_ui <- function(id, d_res) {
 
         # State based results
         mainPanel(
-          plotlyOutput(ns("TimePlot")),
+          withSpinner(plotlyOutput(ns("TimePlot"))),
           br(),
           h4("Estimated probability of increase from year to year"),
           tableOutput(ns("ProbTable")),

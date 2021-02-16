@@ -50,7 +50,7 @@ national_ui <- function(id, d_res) {
       hr(),
       # Show a plot of the generated distribution
       mainPanel(
-        plotlyOutput(ns("MapPlot"), width = "100%")
+        withSpinner(plotlyOutput(ns("MapPlot"), width = "100%"))
       )
     )
   )

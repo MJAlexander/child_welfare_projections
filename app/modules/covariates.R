@@ -66,7 +66,7 @@ covariates_ui <- function(id, betas) {
 
         # Show a plot of the generated distribution
         mainPanel(
-          plotOutput(ns("BetaPlot")),
+          withSpinner(plotOutput(ns("BetaPlot"))),
           br(),
           plotOutput(ns("BetaPlotLegend"), inline = TRUE)
         )
