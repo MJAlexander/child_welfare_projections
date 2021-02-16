@@ -85,7 +85,8 @@ national_server <- function(id, d_res, merged_data, Noax) {
             coord_fixed(1.5) +
             ggtitle(paste0("Foster care ", str_to_lower(input$indicator), ", ", input$year, " (per 1000)\n", input$race, " population"))
           fig <- ggplotly(p, tooltip = "text") %>%
-            layout(xaxis = Noax, yaxis = Noax)
+            layout(xaxis = Noax, yaxis = Noax) %>%
+            config(displayModeBar = FALSE)
 
           fig
         }
