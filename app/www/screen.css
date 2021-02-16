@@ -14,6 +14,12 @@ body {
   margin-right: auto;
 }
 
+/* Class "row" (used in fluidRow) has margin-right and -left -15px - set to 0 to retain consistent widths with other divs */
+.app-row {
+   margin-right: 0;
+   margin-left: 0;
+}
+
 /* Set colour of well panel */
 .well {
   background-color: white;

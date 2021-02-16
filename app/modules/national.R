@@ -6,14 +6,15 @@ national_ui <- function(id, d_res) {
     div(
       class = "app-page",
       h2("National overview"),
+
       fluidRow(
-        box(
-          width = 10, solidHeader = FALSE, status = "primary",
-          "Select a year and indicator below to to see trends for the United States. Mouse over map to see estimate with 80% credible intervals."
-        )
+        class = "app-row",
+        "Select a year and indicator below to to see trends for the United States. Mouse over map to see estimate with 80% credible intervals."
       ),
-      sidebarLayout(
-        sidebarPanel(
+      hr(),
+      fluidRow(
+        column(
+          width = 4,
           sliderInput(
             inputId = ns("year"), label = "Year",
             min = 2005, # min(d_res$year),
@@ -21,26 +22,35 @@ national_ui <- function(id, d_res) {
             value = min(d_res$year),
             sep = "",
             animate = animationOptions(interval = 1000)
-          ),
+          )
+        ),
+        column(
+          width = 3,
           selectInput(
             inputId = ns("indicator"), label = "Indicator",
             c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-          ),
+          )
+        ),
+        column(
+          width = 3,
           selectInput(
             inputId = ns("race"), label = "Race/ethnicity",
             c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
-          ),
+          )
+        ),
+        column(
+          width = 2,
           radioButtons(
             inputId = ns("type"),
             label = "Measure",
             choices = c("per capita", "number")
           )
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-          plotlyOutput(ns("MapPlot"))
         )
+      ),
+      hr(),
+      # Show a plot of the generated distribution
+      mainPanel(
+        plotlyOutput(ns("MapPlot"), width = "100%")
       )
     )
   )
