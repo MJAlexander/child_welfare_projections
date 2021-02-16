@@ -13,8 +13,9 @@ national_ui <- function(id, d_res) {
       ),
       hr(),
       fluidRow(
+        class = "app-row",
         column(
-          width = 4,
+          width = 3,
           sliderInput(
             inputId = ns("year"), label = "Year",
             min = 2005, # min(d_res$year),
@@ -49,9 +50,7 @@ national_ui <- function(id, d_res) {
       ),
       hr(),
       # Show a plot of the generated distribution
-      mainPanel(
-        withSpinner(plotlyOutput(ns("MapPlot"), width = "100%"))
-      )
+      withSpinner(plotlyOutput(ns("MapPlot"), width = "80%", height = "600px"))
     )
   )
 }

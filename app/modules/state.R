@@ -11,34 +11,58 @@ state_ui <- function(id, d_res) {
         class = "app-row",
         "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
       ),
-      sidebarLayout(
-        sidebarPanel(
+      hr(),
+      fluidRow(
+        class = "app-row",
+        column(
+          width = 3,
           selectInput(
             inputId = ns("state"),
             label = "State",
             choices = unique(d_res$state)
-          ),
+          )
+        ),
+        column(
+          width = 3,
           selectInput(
             inputId = ns("indicator"), label = "Indicator",
             c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-          ),
+          )
+        ),
+        column(
+          width = 3,
           selectInput(
             inputId = ns("race"), label = "Race/ethnicity",
             c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
-          ),
+          )
+        ),
+
+        column(
+          width = 2,
           radioButtons(
             inputId = ns("type"),
             label = "Measure",
             choices = c("per capita", "number")
           )
-        ),
+        )
+      ),
+      hr(),
 
-        # State based results
-        mainPanel(
-          withSpinner(plotlyOutput(ns("TimePlot"))),
-          br(),
+      fluidRow(
+        class = "app-row",
+        withSpinner(plotlyOutput(ns("TimePlot"), width = "100%"))
+      ),
+
+
+      fluidRow(
+        class = "app-row",
+        column(
+          width = 6,
           h4("Estimated probability of increase from year to year"),
-          tableOutput(ns("ProbTable")),
+          tableOutput(ns("ProbTable"))
+        ),
+        column(
+          width = 6,
           h4("Top covariates influencing projection"),
           tableOutput(ns("CoefTable"))
         )
@@ -116,8 +140,9 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
           select(-state, -indicator, -race) %>%
           mutate(year = as.character(year)) %>%
           rename(
-            "probability of increase from previous year" = pr_increase,
-            "probability of increase from 2018" = pr_increase_2018
+            "Probability of increase from previous year" = pr_increase,
+            "Probability of increase from 2018" = pr_increase_2018,
+            Year = year
           )
       })
       output$CoefTable <- renderTable({
@@ -133,9 +158,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
             CI = paste0(" (", round(lower, 3), ",", round(upper, 3), ")"),
             estimate = round(value, 3)
           ) %>%
-          select(variable_description, estimate, CI) %>%
-          head(5) %>%
-          rename(covariate = variable_description, `80% CI` = CI)
+          select(Covariate = variable_description, Estimate = estimate, `80% CI` = CI) %>%
+          head(5)
       })
     }
   )
