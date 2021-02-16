@@ -40,7 +40,7 @@ national_ui <- function(id, d_res) {
           )
         ),
         column(
-          width = 2,
+          width = 3,
           radioButtons(
             inputId = ns("type"),
             label = "Measure",
@@ -50,7 +50,9 @@ national_ui <- function(id, d_res) {
       ),
       hr(),
       # Show a plot of the generated distribution
-      withSpinner(plotlyOutput(ns("MapPlot"), width = "80%", height = "600px"))
+      column(12, align = "center",
+      withSpinner(plotlyOutput(ns("MapPlot"), width = "80%", height = "500px"))
+      )
     )
   )
 }

@@ -38,7 +38,7 @@ state_ui <- function(id, d_res) {
         ),
 
         column(
-          width = 2,
+          width = 3,
           radioButtons(
             inputId = ns("type"),
             label = "Measure",
@@ -47,12 +47,7 @@ state_ui <- function(id, d_res) {
         )
       ),
       hr(),
-
-      fluidRow(
-        class = "app-row",
-        withSpinner(plotlyOutput(ns("TimePlot"), width = "100%"))
-      ),
-
+        withSpinner(plotlyOutput(ns("TimePlot"), width = "100%", height = "400px")),
 
       fluidRow(
         class = "app-row",
@@ -76,6 +71,7 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
   moduleServer(
     id,
     function(input, output, session) {
+
       output$TimePlot <- renderPlotly({
         if (input$type == "per capita") {
           p <- ggplot(
