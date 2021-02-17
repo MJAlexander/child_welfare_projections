@@ -86,7 +86,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
           fig[["x"]][["data"]][[1]][["name"]] <- "estimate"
           fig[["x"]][["data"]][[2]][["name"]] <- "observed"
 
-          fig
+          fig %>%
+            config(displayModeBar = FALSE)
         }
         else {
           p <- ggplot(
@@ -111,7 +112,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
           fig[["x"]][["data"]][[1]][["name"]] <- "estimate"
           fig[["x"]][["data"]][[2]][["name"]] <- "observed"
 
-          fig
+          fig %>%
+            config(displayModeBar = FALSE)
         }
       })
 
