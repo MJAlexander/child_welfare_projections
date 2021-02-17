@@ -20,42 +20,51 @@ covariates_ui <- function(id, betas) {
             inputId = ns("indicator"), label = "Indicator",
             c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_1"),
             label = "Child welfare measures",
-            choices = sort(unique(betas$variable_description[betas$category == "Child welfare measures"])), selected = "Median salary of social worker"
+            choices = sort(unique(betas$variable_description[betas$category == "Child welfare measures"])),
+            selected = "Median salary of social worker"
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_2"),
             label = "Criminal justice",
             choices = sort(unique(betas$variable_description[betas$category == "Criminal justice"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_3"),
             label = "Demographic measures",
             choices = sort(unique(betas$variable_description[betas$category == "Demographic measures"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_4"),
             label = "Economic well-being",
             choices = sort(unique(betas$variable_description[betas$category == "Economic well-being"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_5"),
             label = "Education",
             choices = sort(unique(betas$variable_description[betas$category == "Education"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_6"),
             label = "Housing measures",
             choices = sort(unique(betas$variable_description[betas$category == "Housing measures"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_7"),
             label = "Public health measures",
             choices = sort(unique(betas$variable_description[betas$category == "Public health measures"]))
           ),
-          checkboxGroupInput(
+          selectizeInput(
+            multiple = TRUE,
             inputId = ns("covariate_8"),
             label = "Social support",
             choices = sort(unique(betas$variable_description[betas$category == "Social support"]))

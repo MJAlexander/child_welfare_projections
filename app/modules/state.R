@@ -3,7 +3,7 @@ state_ui <- function(id, d_res) {
 
 
   tabPanel(
-    "Time",
+    "State",
     div(
       class = "app-page",
       h2("State projections"),

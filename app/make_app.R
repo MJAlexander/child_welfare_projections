@@ -58,7 +58,6 @@ ui <- tagList(
     title = "Trends and projections of foster care indicators in the United States",
     theme = bslib::bs_theme(version = 4, bg = "white", fg = "black", primary = "#ED6F0F"),
 
-
     # National tab content
     national_ui("national", d_res = d_res),
 
