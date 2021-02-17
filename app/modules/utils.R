@@ -9,7 +9,7 @@ horizontal_inputs <- function(..., widths = NULL) {
     }
 
     widths <- rep(widths, length(inputs))
-  } if (!is.null(widths) & sum(widths) > 12) {
+  } else if (!is.null(widths) & sum(widths) > 12) {
     stop("`widths` must be 12 or less", call. = FALSE)
   }
 

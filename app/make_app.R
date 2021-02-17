@@ -45,6 +45,7 @@ source("modules/national.R")
 source("modules/state.R")
 source("modules/covariates.R")
 source("modules/about.R")
+source("modules/utils.R")
 
 options(spinner.color = "#ED6F0F")
 

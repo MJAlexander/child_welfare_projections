@@ -1,6 +1,15 @@
 covariates_ui <- function(id, betas) {
   ns <- shiny::NS(id)
 
+  covariate_input <- function(label, i, selected = NULL) {
+    selectizeInput(
+      multiple = TRUE,
+      selected = selected,
+      inputId = ns(paste0("covariate_", i)),
+      label = label,
+      choices = sort(unique(betas$variable_description[betas$category == label]))
+    )
+  }
 
   tabPanel(
     "Covariates",
@@ -14,70 +23,33 @@ covariates_ui <- function(id, betas) {
           "<br/>", "<br/>", "Note: only 9 covariates can be selected at any one time."
         )
       ),
-      sidebarLayout(
-        sidebarPanel(
-          selectInput(
-            inputId = ns("indicator"), label = "Indicator",
-            c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_1"),
-            label = "Child welfare measures",
-            choices = sort(unique(betas$variable_description[betas$category == "Child welfare measures"])),
-            selected = "Median salary of social worker"
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_2"),
-            label = "Criminal justice",
-            choices = sort(unique(betas$variable_description[betas$category == "Criminal justice"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_3"),
-            label = "Demographic measures",
-            choices = sort(unique(betas$variable_description[betas$category == "Demographic measures"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_4"),
-            label = "Economic well-being",
-            choices = sort(unique(betas$variable_description[betas$category == "Economic well-being"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_5"),
-            label = "Education",
-            choices = sort(unique(betas$variable_description[betas$category == "Education"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_6"),
-            label = "Housing measures",
-            choices = sort(unique(betas$variable_description[betas$category == "Housing measures"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_7"),
-            label = "Public health measures",
-            choices = sort(unique(betas$variable_description[betas$category == "Public health measures"]))
-          ),
-          selectizeInput(
-            multiple = TRUE,
-            inputId = ns("covariate_8"),
-            label = "Social support",
-            choices = sort(unique(betas$variable_description[betas$category == "Social support"]))
-          )
-        ),
+      hr(),
 
-        # Show a plot of the generated distribution
-        mainPanel(
-          withSpinner(plotOutput(ns("BetaPlot"))),
-          br(),
-          plotOutput(ns("BetaPlotLegend"), inline = TRUE)
-        )
-      )
+      horizontal_inputs(
+        selectInput(
+          inputId = ns("indicator"), label = "Indicator",
+          c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
+        ),
+        covariate_input("Child welfare measures", 1, selected = "Median salary of social worker"),
+        covariate_input("Criminal justice", 2)
+      ),
+
+      horizontal_inputs(
+        covariate_input("Demographic measures", 3),
+        covariate_input("Economic well-being", 4),
+        covariate_input("Education", 5)
+      ),
+
+      horizontal_inputs(
+        covariate_input("Housing measures", 6),
+        covariate_input("Public health measures", 7),
+        covariate_input("Social support", 8)
+      ),
+      hr(),
+
+      # Show a plot of the generated distribution
+      withSpinner(plotOutput(ns("BetaPlot"))),
+      plotOutput(ns("BetaPlotLegend"), inline = TRUE)
     )
   )
 }
