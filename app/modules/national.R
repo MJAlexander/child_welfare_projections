@@ -15,7 +15,7 @@ national_ui <- function(id, d_res) {
       fluidRow(
         class = "app-row",
         column(
-          width = 3,
+          width = 4,
           sliderInput(
             inputId = ns("year"), label = "Year",
             min = 2005, # min(d_res$year),
@@ -40,7 +40,7 @@ national_ui <- function(id, d_res) {
           )
         ),
         column(
-          width = 3,
+          width = 2,
           radioButtons(
             inputId = ns("type"),
             label = "Measure",
