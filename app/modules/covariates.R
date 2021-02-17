@@ -18,10 +18,8 @@ covariates_ui <- function(id, betas) {
       h2("Estimated association with covariates"),
       fluidRow(
         class = "app-row",
-        HTML(
-          "This tab shows the coefficient estimates for each of the covariates included in the model. Select and indicator, and one or more covariates to see estimates by census division and year. Coefficients sizes represent a %-% change after controlling for all other covariates in the model.",
-          "<br/>", "<br/>", "Note: only 9 covariates can be selected at any one time."
-        )
+        p("This tab shows the coefficient estimates for each of the covariates included in the model. Select an indicator, and one or more covariates to see estimates by census division and year. Coefficients sizes represent a %-% change after controlling for all other covariates in the model."),
+        p("Note: only 9 covariates can be selected at any one time.")
       ),
       hr(),
 

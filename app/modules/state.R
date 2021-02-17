@@ -87,7 +87,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
           fig[["x"]][["data"]][[2]][["name"]] <- "observed"
 
           fig %>%
-            config(displayModeBar = FALSE)
+            config(displayModeBar = FALSE) %>%
+            layout(xaxis = list(fixedrange = TRUE), yaxis = list(fixedrange = TRUE))
         }
         else {
           p <- ggplot(
@@ -113,7 +114,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
           fig[["x"]][["data"]][[2]][["name"]] <- "observed"
 
           fig %>%
-            config(displayModeBar = FALSE)
+            config(displayModeBar = FALSE) %>%
+          layout(xaxis = list(fixedrange = TRUE), yaxis = list(fixedrange = TRUE))
         }
       })
 

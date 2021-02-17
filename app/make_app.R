@@ -36,7 +36,8 @@ Noax <- list(
   zeroline = FALSE,
   showline = FALSE,
   showticklabels = FALSE,
-  showgrid = FALSE
+  showgrid = FALSE,
+  fixedrange = TRUE
 )
 
 # 3. Shiny code -----------------------------------------------------------
