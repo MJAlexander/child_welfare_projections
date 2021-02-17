@@ -12,46 +12,35 @@ national_ui <- function(id, d_res) {
         "Select a year and indicator below to to see trends for the United States. Mouse over map to see estimate with 80% credible intervals."
       ),
       hr(),
-      fluidRow(
-        class = "app-row",
-        column(
-          width = 4,
-          sliderInput(
-            inputId = ns("year"), label = "Year",
-            min = 2005, # min(d_res$year),
-            max = max(d_res$year),
-            value = min(d_res$year),
-            sep = "",
-            animate = animationOptions(interval = 1000)
-          )
+      horizontal_inputs(
+        widths = c(4, 3, 3, 2),
+        sliderInput(
+          inputId = ns("year"), label = "Year",
+          min = 2005, # min(d_res$year),
+          max = max(d_res$year),
+          value = min(d_res$year),
+          sep = "",
+          animate = animationOptions(interval = 1000)
         ),
-        column(
-          width = 3,
-          selectInput(
-            inputId = ns("indicator"), label = "Indicator",
-            c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-          )
+        selectInput(
+          inputId = ns("indicator"), label = "Indicator",
+          c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
         ),
-        column(
-          width = 3,
-          selectInput(
-            inputId = ns("race"), label = "Race/ethnicity",
-            c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
-          )
+        selectInput(
+          inputId = ns("race"), label = "Race/ethnicity",
+          c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
         ),
-        column(
-          width = 2,
-          radioButtons(
-            inputId = ns("type"),
-            label = "Measure",
-            choices = c("per capita", "number")
-          )
+        radioButtons(
+          inputId = ns("type"),
+          label = "Measure",
+          choices = c("per capita", "number")
         )
       ),
       hr(),
       # Show a plot of the generated distribution
-      column(12, align = "center",
-      withSpinner(plotlyOutput(ns("MapPlot"), width = "80%", height = "500px"))
+      column(12,
+        align = "center",
+        withSpinner(plotlyOutput(ns("MapPlot"), width = "80%", height = "500px"))
       )
     )
   )

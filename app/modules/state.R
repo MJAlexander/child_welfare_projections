@@ -12,42 +12,28 @@ state_ui <- function(id, d_res) {
         "Select a state and indicator below to see estimates and projections up to 2022. Shaded area indicates 80% credible intervals. The table below the chart shows the estimated probability of the indicator from year to year."
       ),
       hr(),
-      fluidRow(
-        class = "app-row",
-        column(
-          width = 3,
-          selectInput(
-            inputId = ns("state"),
-            label = "State",
-            choices = unique(d_res$state)
-          )
+      horizontal_inputs(
+        selectInput(
+          inputId = ns("state"),
+          label = "State",
+          choices = unique(d_res$state)
         ),
-        column(
-          width = 3,
-          selectInput(
-            inputId = ns("indicator"), label = "Indicator",
-            c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
-          )
+        selectInput(
+          inputId = ns("indicator"), label = "Indicator",
+          c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
         ),
-        column(
-          width = 3,
-          selectInput(
-            inputId = ns("race"), label = "Race/ethnicity",
-            c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
-          )
+        selectInput(
+          inputId = ns("race"), label = "Race/ethnicity",
+          c("Total", "Non-Hispanic White", "Non-Hispanic Black", "Non-Hispanic Asian/Pacific Islander", "Non-Hispanic American Indian/Alaska Native", "Hispanic")
         ),
-
-        column(
-          width = 3,
-          radioButtons(
-            inputId = ns("type"),
-            label = "Measure",
-            choices = c("per capita", "number")
-          )
+        radioButtons(
+          inputId = ns("type"),
+          label = "Measure",
+          choices = c("per capita", "number")
         )
       ),
       hr(),
-        withSpinner(plotlyOutput(ns("TimePlot"), width = "100%", height = "400px")),
+      withSpinner(plotlyOutput(ns("TimePlot"), width = "100%", height = "400px")),
 
       fluidRow(
         class = "app-row",
@@ -71,7 +57,6 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
   moduleServer(
     id,
     function(input, output, session) {
-
       output$TimePlot <- renderPlotly({
         if (input$type == "per capita") {
           p <- ggplot(
