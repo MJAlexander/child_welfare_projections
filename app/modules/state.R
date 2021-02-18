@@ -33,19 +33,26 @@ state_ui <- function(id, d_res) {
         )
       ),
       hr(),
-      withSpinner(plotlyOutput(ns("TimePlot"), width = "100%", height = "400px")),
+      div(
+      withSpinner(plotlyOutput(ns("TimePlot"), width = "100%", height = "400px"))
+      ),
+      br(),
 
       fluidRow(
         class = "app-row",
         column(
           width = 6,
-          h4("Estimated probability of increase from year to year"),
+          wellPanel(
+          h5("Estimated probability of increase from year to year"),
           tableOutput(ns("ProbTable"))
+          )
         ),
         column(
           width = 6,
-          h4("Top covariates influencing projection"),
+          wellPanel(
+          h5("Top covariates influencing projection"),
           tableOutput(ns("CoefTable"))
+          )
         )
       )
     )
@@ -130,7 +137,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
             Year = year
           )
       })
-      output$CoefTable <- renderTable({
+      output$CoefTable <- renderTable(
+        {
         betas %>%
           filter(indicator == input$indicator, race == input$race, division == state_div %>%
             filter(state == input$state) %>%
