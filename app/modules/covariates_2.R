@@ -56,34 +56,29 @@ covariates_server_2 <- function(id, betas) {
       ) %>%
         debounce(1000)
 
-      # Render plot in reactive for reuse
-      beta_plot <- reactive({
-        betas %>%
-          filter(
-            ci_width == 0.5,
-            indicator == input$indicator,
-            race == "Total",
-            variable_description %in% vars_selected(), year < 2019
-          ) %>%
-          ggplot(aes(year, value, color = variable_description)) +
-          geom_point() +
-          ylab("coefficient") +
-          theme_bw(base_size = 14) +
-          scale_x_continuous(breaks = seq(2003, 2018, by = 4)) +
-          geom_errorbar(aes(ymin = lower, ymax = upper), width = 0) +
-          facet_wrap(~division) +
-          scale_color_brewer(
-            name = "covariate", palette = "Set1",
-            guide = guide_legend(title.position = "top", title.hjust = 0.5, ncol = 1)
-          ) +
-          theme(legend.position = "bottom")
-      })
-
-      # Grab plot only, no legend
       output$BetaPlot <- renderPlot(
         res = 96,
         {
-          beta_plot()
+          betas %>%
+            filter(
+              ci_width == 0.5,
+              indicator == input$indicator,
+              race == "Total",
+              variable_description %in% vars_selected(), year < 2019
+            ) %>%
+            ggplot(aes(year, value, color = variable_description)) +
+            geom_point() +
+            ylab("coefficient") +
+            theme_bw(base_size = 14) +
+            scale_x_continuous(breaks = seq(2003, 2018, by = 4)) +
+            geom_errorbar(aes(ymin = lower, ymax = upper), width = 0) +
+            facet_wrap(~division) +
+            scale_color_brewer(
+              name = "covariate", palette = "Set1",
+              guide = guide_legend(title.position = "top", title.hjust = 0.5, ncol = 1)
+            ) +
+            theme_minimal() +
+            theme(legend.position = "bottom")
         }
       )
 
