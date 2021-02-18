@@ -20,7 +20,7 @@ national_ui <- function(id, d_res) {
           max = max(d_res$year),
           value = min(d_res$year),
           sep = "",
-          animate = animationOptions(interval = 1000)
+          animate = animationOptions(interval = 3000)
         ),
         selectInput(
           inputId = ns("indicator"), label = "Indicator",
