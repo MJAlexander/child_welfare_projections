@@ -1,16 +1,5 @@
-covariates_ui <- function(id, betas) {
+covariates_ui_2 <- function(id, betas) {
   ns <- shiny::NS(id)
-
-  # Function to create covariate selectors
-  covariate_input <- function(label, i, selected = NULL) {
-    selectizeInput(
-      multiple = TRUE,
-      selected = selected,
-      inputId = ns(paste0("covariate_", i)),
-      label = label,
-      choices = sort(unique(betas$variable_description[betas$category == label]))
-    )
-  }
 
   tabPanel(
     "Covariates",
@@ -25,25 +14,26 @@ covariates_ui <- function(id, betas) {
       hr(),
 
       horizontal_inputs(
+        widths = c(3, 9),
         selectInput(
           inputId = ns("indicator"), label = "Indicator",
           c("Entries", "Permanent exits", "Non-permanent exits", "Investigations")
         ),
-        covariate_input("Child welfare measures", 1, selected = "Median salary of social worker"),
-        covariate_input("Criminal justice", 2)
+
+        selectizeInput(
+          inputId = ns("covariates"),
+          label = "Covariates",
+          choices = betas %>%
+            distinct(category, variable_description) %>%
+            split(.$category) %>%
+            purrr::map(~ pull(.x, variable_description)),
+          selected = "Median salary of social worker",
+          multiple = TRUE,
+          width = "100%",
+          options = list(maxItems = 9)
+        )
       ),
 
-      horizontal_inputs(
-        covariate_input("Demographic measures", 3),
-        covariate_input("Economic well-being", 4),
-        covariate_input("Education", 5)
-      ),
-
-      horizontal_inputs(
-        covariate_input("Housing measures", 6),
-        covariate_input("Public health measures", 7),
-        covariate_input("Social support", 8)
-      ),
       hr(),
 
       # Show a plot of the generated distribution
@@ -55,19 +45,14 @@ covariates_ui <- function(id, betas) {
   )
 }
 
-covariates_server <- function(id, betas) {
+covariates_server_2 <- function(id, betas) {
   moduleServer(
     id,
     function(input, output, session) {
 
       # Make vars_selected a reactive for use in plot generation and calculation of plot size
       vars_selected <- reactive(
-      c(
-        input$covariate_1, input$covariate_2,
-        input$covariate_3, input$covariate_4,
-        input$covariate_5, input$covariate_6,
-        input$covariate_7, input$covariate_8
-      )
+        input$covariates
       ) %>%
         debounce(1000)
 
