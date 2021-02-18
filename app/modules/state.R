@@ -86,8 +86,8 @@ state_server <- function(id, d_res, betas, state_div, pr_res) {
             ggtitle(paste0(input$state, " (", state_div %>% filter(state == input$state) %>% select(division) %>% pull(), " division), ", input$race, " population")) +
             theme_bw(base_size = 14) +
             ylab("per 1,000") +
-            scale_fill_manual(name = "", values = c("estimate" = "red")) +
-            scale_color_manual(name = "", values = c("estimate" = "red", "observed" = "black"))
+            scale_fill_manual(name = "", values = c("estimate" = "#ED6F0F")) +
+            scale_color_manual(name = "", values = c("estimate" = "#ED6F0F", "observed" = "black"))
 
           fig <- ggplotly(p, tooltip = "text") # %>% layout(legend = list(x = 0.1, y = 0.9))
           fig[["x"]][["data"]][[1]][["name"]] <- "estimate"
