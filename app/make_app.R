@@ -46,7 +46,6 @@ source("modules/app_page.R")
 source("modules/national.R")
 source("modules/state.R")
 source("modules/covariates.R")
-source("modules/covariates_2.R")
 source("modules/about.R")
 source("modules/utils.R")
 
@@ -69,7 +68,6 @@ ui <- tagList(
     state_ui("state", d_res = d_res),
 
     # Covariates tab content
-    covariates_ui("covariates_original", betas = betas),
     covariates_ui_2("covariates", betas = betas),
 
     # About tab content
@@ -88,7 +86,6 @@ server <- function(input, output) {
   state_server("state", d_res = d_res, betas = betas, state_div = state_div, pr_res = pr_res)
 
   # Covariates Server
-  covariates_server("covariates_original", betas = betas)
   covariates_server_2("covariates", betas = betas)
 }
 
