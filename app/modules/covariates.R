@@ -1,4 +1,4 @@
-covariates_ui_2 <- function(id, betas) {
+covariates_ui <- function(id, betas) {
   ns <- shiny::NS(id)
 
   tabPanel(
@@ -45,7 +45,7 @@ covariates_ui_2 <- function(id, betas) {
   )
 }
 
-covariates_server_2 <- function(id, betas) {
+covariates_server <- function(id, betas) {
   moduleServer(
     id,
     function(input, output, session) {

@@ -68,7 +68,7 @@ ui <- tagList(
     state_ui("state", d_res = d_res),
 
     # Covariates tab content
-    covariates_ui_2("covariates", betas = betas),
+    covariates_ui("covariates", betas = betas),
 
     # About tab content
     about_ui()
@@ -86,7 +86,7 @@ server <- function(input, output) {
   state_server("state", d_res = d_res, betas = betas, state_div = state_div, pr_res = pr_res)
 
   # Covariates Server
-  covariates_server_2("covariates", betas = betas)
+  covariates_server("covariates", betas = betas)
 }
 
 # Run the application
