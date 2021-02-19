@@ -7,14 +7,14 @@
 
 library(shiny)
 library(shinycssloaders)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(stringr)
 library(shinyWidgets)
-library(RColorBrewer)
 library(maps)
-library(kableExtra)
 library(plotly)
-library(tidybayes)
-library(ggpubr)
+library(bslib)
 
 # Data
 
@@ -59,7 +59,7 @@ ui <- tagList(
   ),
   app_page(
     title = "Trends and projections of foster care indicators in the United States",
-    theme = bslib::bs_theme(version = 3, bg = "white", fg = "black", primary = "#ED6F0F"),
+    theme = bs_theme(version = 3, bg = "white", fg = "black", primary = "#ED6F0F"),
     header = div(class = "app-page", h3("Trends and projections of foster care indicators in the United States")),
     # National tab content
     national_ui("national", d_res = d_res),
