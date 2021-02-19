@@ -42,6 +42,7 @@ Noax <- list(
 
 # 3. Shiny code -----------------------------------------------------------
 
+source("modules/app_page.R")
 source("modules/national.R")
 source("modules/state.R")
 source("modules/covariates.R")
@@ -57,10 +58,10 @@ ui <- tagList(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "screen.css")
   ),
-  navbarPage(
+  app_page(
     title = "Trends and projections of foster care indicators in the United States",
-    theme = bslib::bs_theme(version = 4, bg = "white", fg = "black", primary = "#ED6F0F"),
-
+    theme = bslib::bs_theme(version = 3, bg = "white", fg = "black", primary = "#ED6F0F"),
+    header = div(class = "app-page", h3("Trends and projections of foster care indicators in the United States")),
     # National tab content
     national_ui("national", d_res = d_res),
 
