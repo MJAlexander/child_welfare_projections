@@ -56,7 +56,7 @@ options(spinner.color = "#ED6F0F")
 
 ui <- tagList(
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "screen.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
   ),
   app_page(
     title = "Trends and projections of foster care indicators in the United States",
