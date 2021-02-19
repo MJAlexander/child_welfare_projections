@@ -7,7 +7,7 @@ about_ui <- function() {
       fluidRow(
         class = "app-row",
         includeMarkdown("www/about.md")
-        )
       )
+    )
   )
 }

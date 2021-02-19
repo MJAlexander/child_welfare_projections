@@ -62,12 +62,12 @@ covariates_server <- function(id, betas) {
 
       # Make vars_selected a reactive for use in plot generation and calculation of plot size
       vars_selected <- reactive(
-      c(
-        input$covariate_1, input$covariate_2,
-        input$covariate_3, input$covariate_4,
-        input$covariate_5, input$covariate_6,
-        input$covariate_7, input$covariate_8
-      )
+        c(
+          input$covariate_1, input$covariate_2,
+          input$covariate_3, input$covariate_4,
+          input$covariate_5, input$covariate_6,
+          input$covariate_7, input$covariate_8
+        )
       ) %>%
         debounce(1000)
 
