@@ -1,0 +1,12 @@
+name: foster_care
+title: foster_care
+username:
+account: monica-alexander
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2321046
+bundleId: 4261635
+url: https://monica-alexander.shinyapps.io/foster_care/
+when: 1614086663.56354
+asMultiple: FALSE
+asStatic: FALSE

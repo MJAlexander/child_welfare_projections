@@ -15,6 +15,7 @@ library(shinyWidgets)
 library(maps)
 library(plotly)
 library(bslib)
+library(markdown)
 
 # Data
 
