@@ -1,0 +1,86 @@
+/* Font styling and colours */
+h2 {
+  color: #ED6F0F;
+}
+
+body {
+  border-top: 18px solid #4A453E;
+  color: #757575;
+}
+
+/* Set maximum width of pages, and center them */
+.app-page {
+  max-width: 1146px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Class "row" (used in fluidRow) has margin-right and -left -15px - set to 0 to retain consistent widths with other divs */
+.app-row {
+   margin-right: 0;
+   margin-left: 0;
+}
+
+/* Set colour of well panel */
+.well {
+  background-color: white;
+}
+
+/* Navbar */
+
+/* Move navbar up 18px (to start with top border line), enable changing position*/
+.navbar .navbar-nav {
+  margin-top: -18px;
+  display: inline-block;
+  float: none;
+}
+
+/* Move links to the right of the container */
+.navbar .navbar-container {
+  text-align: right;
+}
+
+/* Remove background of actual navbar (setting background of links below) */
+.navbar-default {
+   background-color: transparent;
+   border-color: transparent;
+}
+
+/* Put padding around nav links, convert to uppercase, add border */
+.navbar-default .navbar-nav > li {
+  padding: 5px 10px 5px 10px;
+  text-transform: uppercase;
+  border-right: 1px solid #59554f
+}
+
+/* Set background colour of nav links */
+.navbar-default .navbar-nav > li {
+  background-color: #4A453E;
+  color: white;
+}
+
+/* Set tab links to white */
+.navbar-default .navbar-nav > li > a, .dropdown-menu > li > a {
+  color: white;
+}
+
+/* Make active tab have orange link and grey background */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	color: #ED6F0F;
+	background-color: #4A453E;
+}
+
+/* Darker grey background on hover */
+.navbar-default .navbar-nav > li:hover {
+  background-color: #3C3C3C;
+}
+
+/* Keeps white text colour on hover */
+.navbar-default .navbar-nav > li:hover > a {
+  color: white;
+}
+
+/* Makes sure background colour of link TEXT is transparent */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+   background-color: transparent;
+}
